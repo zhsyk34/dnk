@@ -1,4 +1,4 @@
-package com.cat.dnk.test;
+package com.cat.dnk.test.server;
 
 import com.cat.dnk.server.tcp.TCPServer;
 import com.cat.dnk.session.SessionMonitor;

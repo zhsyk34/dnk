@@ -1,6 +1,6 @@
 package com.cat.dnk.test.gateway;
 
-import com.cat.dnk.Util;
+import com.cat.dnk.kit.Util;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 

@@ -9,9 +9,12 @@ public class JsonKit {
 		return jsonObject.entrySet().size() == 0;
 	}
 
-	public static Object get(JsonObject jsonObject, String key) {
-		JsonElement element = jsonObject.get(key);
-		return element;
+	public static JsonElement get(JsonObject jsonObject, String key) {
+		return jsonObject.get(key);
+	}
+
+	public static int getInt(JsonObject jsonObject, String key) {
+		return get(jsonObject, key).getAsInt();
 	}
 
 }

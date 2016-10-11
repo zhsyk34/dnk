@@ -1,4 +1,4 @@
-package com.cat.dnk;
+package com.cat.dnk.other;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -31,7 +31,7 @@ public class UDPClient {
 				}
 			});
 
-//			BOOTSTRAP.localAddress(new InetSocketAddress(Config.SERVER_HOST, 6666));
+//			BOOTSTRAP.localAddress(new InetSocketAddress(Config.LOCAL_HOST, 6666));
 //			Channel channel = BOOTSTRAP.bind(6666).syncUninterruptibly().channel();
 			Channel channel = BOOTSTRAP.bind(PORT).sync().channel();
 			System.out.println("client wait for udp...");

@@ -2,6 +2,8 @@ package com.cat.dnk.test.gateway;
 
 import com.cat.dnk.server.config.Config;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.DatagramPacket;
@@ -10,40 +12,32 @@ import io.netty.util.CharsetUtil;
 
 import java.net.InetSocketAddress;
 
-public class GatewayUDP {
+public class TestUDPClient {
 
-	public void bind(int port) {
+	public void start() throws Exception {
 		Bootstrap bootstrap = new Bootstrap();
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
 			bootstrap.group(group).channel(NioDatagramChannel.class);
+
 			bootstrap.option(ChannelOption.SO_BROADCAST, false);
 
 			bootstrap.handler(new SimpleChannelInboundHandler<DatagramPacket>() {
 				@Override
 				protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
-					String data = msg.content().toString(CharsetUtil.UTF_8);
-					data = data.replaceAll("\r|\n", "");
-					System.out.println("receive " + ctx.channel().remoteAddress() + " [" + data + "]");
-
-					//TODO:loginReady
-					if ("loginReady".equals(data)) {
-						System.out.println("ready to connect tcp server");
-						//TODO one bind twice or more
-						new GatewayTCP().start();
-					}
+					System.out.println(msg.content().toString(CharsetUtil.UTF_8));
 				}
 			});
 
-			bootstrap.localAddress(new InetSocketAddress(Config.LOCAL_HOST, port));
-			//Channel channel = bootstrap.bind(port).syncUninterruptibly().channel();
-			Channel channel = bootstrap.bind().syncUninterruptibly().channel();
-			System.out.println(port + " bind.");
-			channel.closeFuture().await();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Channel channel = bootstrap.bind(0).syncUninterruptibly().channel();
+			ByteBuf buf = Unpooled.copiedBuffer("This is order.", CharsetUtil.UTF_8);
+			channel.writeAndFlush(new DatagramPacket(buf, new InetSocketAddress(Config.LOCAL_HOST, 50000))).sync();
 		} finally {
 			group.shutdownGracefully();
 		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		new TestUDPClient().start();
 	}
 }

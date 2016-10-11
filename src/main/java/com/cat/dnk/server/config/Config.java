@@ -2,7 +2,7 @@ package com.cat.dnk.server.config;
 
 public class Config {
 
-	public static final String SERVER_HOST = "127.0.0.1";
+	public static final String LOCAL_HOST = "127.0.0.1";
 
 	public static final int TCP_SERVER_PORT = 15999;
 

@@ -1,4 +1,4 @@
-package com.cat.dnk.test;
+package com.cat.dnk.other;
 
 import com.cat.dnk.server.tcp.UDPSponsor;
 

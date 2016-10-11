@@ -18,7 +18,7 @@ public class GatewayTCP {
 
 			bootstrap.handler(new GatewayTCPHandler());
 
-			bootstrap.connect(Config.SERVER_HOST, Config.TCP_SERVER_PORT).sync();
+			bootstrap.connect(Config.LOCAL_HOST, Config.TCP_SERVER_PORT).sync();
 
 			//new CountDownLatch(1).await();
 		} catch (InterruptedException e) {

@@ -1,4 +1,4 @@
-package com.cat.dnk;
+package com.cat.dnk.kit;
 
 import io.netty.buffer.ByteBuf;
 
