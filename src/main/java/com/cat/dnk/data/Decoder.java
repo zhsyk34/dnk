@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 
 public class Decoder {
 
-	public static void decode(ByteBuf buf) {
+    public static void decode(ByteBuf buf) {
 
-	}
+    }
 }

@@ -7,22 +7,22 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SessionInfo {
-	private String key;//
-	private Channel channel;
-	private long login;//登录时间
-	private long update;//更新时间
+    private String key;//
+    private Channel channel;
+    private long login;//登录时间
+    private long update;//更新时间
 
-	private SessionInfo() {
-	}
+    private SessionInfo() {
+    }
 
-	public static SessionInfo build(String key, Channel channel, long login, long update) {
-		SessionInfo sessionInfo = new SessionInfo();
+    public static SessionInfo build(String key, Channel channel, long login, long update) {
+        SessionInfo sessionInfo = new SessionInfo();
 
-		sessionInfo.setKey(key);
-		sessionInfo.setChannel(channel);
-		sessionInfo.setLogin(login);
-		sessionInfo.setUpdate(update);
+        sessionInfo.setKey(key);
+        sessionInfo.setChannel(channel);
+        sessionInfo.setLogin(login);
+        sessionInfo.setUpdate(update);
 
-		return sessionInfo;
-	}
+        return sessionInfo;
+    }
 }

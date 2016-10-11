@@ -14,30 +14,30 @@ import java.net.InetSocketAddress;
 
 public class TestUDPClient {
 
-	public void start() throws Exception {
-		Bootstrap bootstrap = new Bootstrap();
-		EventLoopGroup group = new NioEventLoopGroup();
-		try {
-			bootstrap.group(group).channel(NioDatagramChannel.class);
+    public static void main(String[] args) throws Exception {
+        new TestUDPClient().start();
+    }
 
-			bootstrap.option(ChannelOption.SO_BROADCAST, false);
+    public void start() throws Exception {
+        Bootstrap bootstrap = new Bootstrap();
+        EventLoopGroup group = new NioEventLoopGroup();
+        try {
+            bootstrap.group(group).channel(NioDatagramChannel.class);
 
-			bootstrap.handler(new SimpleChannelInboundHandler<DatagramPacket>() {
-				@Override
-				protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
-					System.out.println(msg.content().toString(CharsetUtil.UTF_8));
-				}
-			});
+            bootstrap.option(ChannelOption.SO_BROADCAST, false);
 
-			Channel channel = bootstrap.bind(0).syncUninterruptibly().channel();
-			ByteBuf buf = Unpooled.copiedBuffer("This is order.", CharsetUtil.UTF_8);
-			channel.writeAndFlush(new DatagramPacket(buf, new InetSocketAddress(Config.LOCAL_HOST, 50000))).sync();
-		} finally {
-			group.shutdownGracefully();
-		}
-	}
+            bootstrap.handler(new SimpleChannelInboundHandler<DatagramPacket>() {
+                @Override
+                protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
+                    System.out.println(msg.content().toString(CharsetUtil.UTF_8));
+                }
+            });
 
-	public static void main(String[] args) throws Exception {
-		new TestUDPClient().start();
-	}
+            Channel channel = bootstrap.bind(0).syncUninterruptibly().channel();
+            ByteBuf buf = Unpooled.copiedBuffer("This is order.", CharsetUtil.UTF_8);
+            channel.writeAndFlush(new DatagramPacket(buf, new InetSocketAddress(Config.LOCAL_HOST, 50000))).sync();
+        } finally {
+            group.shutdownGracefully();
+        }
+    }
 }

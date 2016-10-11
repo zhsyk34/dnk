@@ -5,16 +5,16 @@ import com.google.gson.JsonObject;
 
 public class JsonKit {
 
-	public static boolean isEmpty(JsonObject jsonObject) {
-		return jsonObject.entrySet().size() == 0;
-	}
+    public static boolean isEmpty(JsonObject jsonObject) {
+        return jsonObject.entrySet().size() == 0;
+    }
 
-	public static JsonElement get(JsonObject jsonObject, String key) {
-		return jsonObject.get(key);
-	}
+    public static JsonElement get(JsonObject jsonObject, String key) {
+        return jsonObject.get(key);
+    }
 
-	public static int getInt(JsonObject jsonObject, String key) {
-		return get(jsonObject, key).getAsInt();
-	}
+    public static int getInt(JsonObject jsonObject, String key) {
+        return get(jsonObject, key).getAsInt();
+    }
 
 }

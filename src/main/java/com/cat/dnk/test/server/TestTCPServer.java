@@ -5,8 +5,8 @@ import com.cat.dnk.session.SessionMonitor;
 
 public class TestTCPServer {
 
-	public static void main(String[] args) {
-		new SessionMonitor().start();
-		new TCPServer().start();
-	}
+    public static void main(String[] args) {
+        new SessionMonitor().start();
+        new TCPServer().start();
+    }
 }

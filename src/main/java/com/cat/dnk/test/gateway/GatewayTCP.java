@@ -9,22 +9,22 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class GatewayTCP {
 
-	public void start() {
-		Bootstrap bootstrap = new Bootstrap();
-		EventLoopGroup group = new NioEventLoopGroup();
-		try {
-			bootstrap.group(group).channel(NioSocketChannel.class);
-			bootstrap.option(ChannelOption.TCP_NODELAY, true);
+    public void start() {
+        Bootstrap bootstrap = new Bootstrap();
+        EventLoopGroup group = new NioEventLoopGroup();
+        try {
+            bootstrap.group(group).channel(NioSocketChannel.class);
+            bootstrap.option(ChannelOption.TCP_NODELAY, true);
 
-			bootstrap.handler(new GatewayTCPHandler());
+            bootstrap.handler(new GatewayTCPHandler());
 
-			bootstrap.connect(Config.LOCAL_HOST, Config.TCP_SERVER_PORT).sync();
+            bootstrap.connect(Config.LOCAL_HOST, Config.TCP_SERVER_PORT).sync();
 
-			//new CountDownLatch(1).await();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			//group.shutdownGracefully();
-		}
-	}
+            //new CountDownLatch(1).await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            //group.shutdownGracefully();
+        }
+    }
 }
